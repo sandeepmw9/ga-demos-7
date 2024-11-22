@@ -11,11 +11,11 @@ jobs:
   test:
     environment: testing
     runs-on: ubuntu-latest
-    container: #use this key to run the job inside a container which runs inside the runner.
-      image: node:16
-      # env: you can define the env variables used by container image by using this feild
+    # container: #use this key to run the job inside a container which runs inside the runner.
+    #   image: node:16
+      # env: you can define the env variables used by container image by using this field
     env:
-      MONGODB_CONNECTION_PROTOCOL: mongodb
+      MONGODB_CONNECTION_PROTOCOL: 127.0.01:27017 #mongodb
       MONGODB_CLUSTER_ADDRESS: mongodb #after defining the service container, we can use service container's label which runs a mongodb server.
       MONGODB_USERNAME: root #after defining the service containers, and their login credetials, we are using same credentials on job level
       MONGODB_PASSWORD: example
@@ -23,6 +23,8 @@ jobs:
     services: #defining a service container, which will create a database for testing that we were earlier using spearately.
       mongodb: #label defined for the service 
         image: mongo #image for the service container, below we pass the login credentials for the db by passing them as env variable.
+        ports:
+          - 27017:27017 # when not using containers, then this step can be used  to expose the port of db to be connected from the runner based steps.
         env:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
