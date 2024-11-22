@@ -15,7 +15,7 @@ jobs:
     #   image: node:16
       # env: you can define the env variables used by container image by using this field
     env:
-      MONGODB_CONNECTION_PROTOCOL: 127.0.01:27017 #mongodb
+      MONGODB_CONNECTION_PROTOCOL: 127.0.0.1:27017 #mongodb
       MONGODB_CLUSTER_ADDRESS: mongodb #after defining the service container, we can use service container's label which runs a mongodb server.
       MONGODB_USERNAME: root #after defining the service containers, and their login credetials, we are using same credentials on job level
       MONGODB_PASSWORD: example
